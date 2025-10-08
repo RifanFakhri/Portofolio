@@ -3,6 +3,7 @@
 import { Send, Mail, Menu, X, Github, Linkedin, Instagram, Phone, MapPin } from 'lucide-react';
 import { motion, easeOut, easeInOut } from 'framer-motion';
 import { useState } from 'react';
+import Image from 'next/image'; // Import the Image component
 
 // ============================================================================
 // CONFIGURATION & VARIANTS
@@ -181,11 +182,13 @@ const PortfolioCard = ({ title, imageUrl, link }: { title: string; imageUrl: str
     rel="noopener noreferrer"
   >
     <div className="bg-[#1C1C1C] rounded-xl overflow-hidden border border-gray-800/50 group-hover:border-purple-500/50 transition-all duration-300">
-      <div className="overflow-hidden">
-        <img 
+      <div className="overflow-hidden relative aspect-[4/3]">
+        <Image 
           src={imageUrl} 
           alt={title} 
-          className="w-full h-auto object-cover aspect-[4/3] group-hover:scale-105 transition-transform duration-300" 
+          fill
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+          className="object-cover group-hover:scale-105 transition-transform duration-300" 
         />
       </div>
       <div className="p-5">
@@ -268,8 +271,8 @@ const ContactSection = () => (
               </div>
               <div>
                 <p className="text-sm text-gray-400">Phone</p>
-                <a href="tel:+628123456789" className="hover:text-purple-400 transition-colors">
-                  +62 812-3456-789
+                <a href="tel:+62895331626561" className="hover:text-purple-400 transition-colors">
+                  +62 895 3316 26561
                 </a>
               </div>
             </div>
@@ -438,8 +441,8 @@ const Footer = () => (
           <div className="space-y-3 text-gray-400">
             <p className="flex items-center gap-2">
               <Mail className="w-4 h-4" />
-              <a href="mailto:rifannurfakhri17@gmail.com" className="hover:text-purple-400 transition-colors">
-                rifannurfakhri17@gmail.com
+              <a href="mailto:fakhririfan86@gmail.com" className="hover:text-purple-400 transition-colors">
+                fakhririfan86@gmail.com
               </a>
             </p>
             <p className="flex items-center gap-2">
@@ -448,8 +451,8 @@ const Footer = () => (
             </p>
             <p className="flex items-center gap-2">
               <Phone className="w-4 h-4" />
-              <a href="tel:+628123456789" className="hover:text-purple-400 transition-colors">
-                +62 812-3456-789
+              <a href="tel:+62895331626561" className="hover:text-purple-400 transition-colors">
+                +62 895-3316-26561
               </a>
             </p>
           </div>
@@ -566,7 +569,13 @@ export default function PortfolioPage() {
           <motion.div variants={imageVariants} whileHover="hover" className="flex-shrink-0">
             <div className="relative">
               <div className="absolute inset-0 bg-gradient-to-r from-purple-600 to-pink-600 rounded-full blur-md opacity-50 animate-pulse"></div>
-              <img src={PROFILE_IMAGE_URL} alt="Rifan Nurfakhri" className="relative rounded-full object-cover border-4 border-gray-800 shadow-2xl w-[280px] h-[280px] md:w-[320px] md:h-[320px] lg:w-[380px] lg:h-[380px] z-10" />
+              <Image 
+                src={PROFILE_IMAGE_URL} 
+                alt="Rifan Nurfakhri" 
+                width={380}
+                height={380}
+                className="relative rounded-full object-cover border-4 border-gray-800 shadow-2xl w-[280px] h-[280px] md:w-[320px] md:h-[320px] lg:w-[380px] lg:h-[380px] z-10" 
+              />
             </div>
           </motion.div>
         </motion.main>
