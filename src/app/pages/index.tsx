@@ -236,10 +236,10 @@ const ContactSection = () => (
     <div className="max-w-4xl mx-auto">
       <motion.div variants={itemVariants} className="text-center mb-16">
         <h2 className="text-4xl md:text-5xl font-bold text-white mb-4 leading-tight">
-          Let's Start The Journey From Concept to Reality
+          Let&apos;s Start The Journey From Concept to Reality
         </h2>
         <p className="text-gray-300 text-lg mb-8 max-w-xl mx-auto">
-          Ready to create something extraordinary together? Let's discuss how my skills as a Full-Stack Developer can elevate your projects to new heights.
+          Ready to create something extraordinary together? Let&apos;s discuss how my skills as a Full-Stack Developer can elevate your projects to new heights.
         </p>
       </motion.div>
 
@@ -248,7 +248,7 @@ const ContactSection = () => (
           <div>
             <h3 className="text-2xl font-bold text-white mb-6">Get In Touch</h3>
             <p className="text-gray-300 mb-8">
-              I'm always open to discussing new opportunities, creative ideas, or potential collaborations. Let's connect and build something amazing!
+              I&apos;m always open to discussing new opportunities, creative ideas, or potential collaborations. Let&apos;s connect and build something amazing!
             </p>
           </div>
 
@@ -394,7 +394,7 @@ const Footer = () => (
             Rifan Nurfakhri
           </a>
           <p className="text-gray-400 mt-4 max-w-md leading-relaxed">
-            Full-Stack Developer passionate about creating digital experiences that combine beautiful design with robust functionality. Let's build the future together.
+            Full-Stack Developer passionate about creating digital experiences that combine beautiful design with robust functionality. Let&apos;s build the future together.
           </p>
           <div className="flex gap-4 mt-6">
             {[
@@ -550,7 +550,7 @@ export default function PortfolioPage() {
               Hello Welcome 👋
             </motion.p>
             <motion.h1 variants={itemVariants} className="text-5xl lg:text-6xl font-bold bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
-              I'm Rifan Nurfakhri
+              I&apos;m Rifan Nurfakhri
             </motion.h1>
             <motion.h2 variants={itemVariants} className="text-5xl lg:text-6xl font-bold text-gray-300 mt-1">
               Web Developer
