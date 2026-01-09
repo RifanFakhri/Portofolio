@@ -3,7 +3,9 @@
 import { Send, Mail, Menu, X, Github, Linkedin, Instagram, Phone, MapPin } from 'lucide-react';
 import { motion, easeOut, easeInOut } from 'framer-motion';
 import { useState } from 'react';
-import Image from 'next/image'; // Import the Image component
+import Image from 'next/image';
+import Link from 'next/link';
+import { projectsData } from '@/data/projects';
 
 // ============================================================================
 // CONFIGURATION & VARIANTS
@@ -67,38 +69,55 @@ const navVariants = {
 
 const experiences = [
   {
+    date: "Oct 2025",
+    company: "PT Biro Klasifikasi Indonesia",
+    role: "Fullstack Developer",
+    description:
+      "I was involved in developing the UT BKI website for PT Biro Klasifikasi Indonesia, designed as a web-based reporting system for Ultrasonic Thickness inspections. The platform supports surveyors and inspectors in managing inspection data, generating structured reports, and producing automated PDF documents for ship inspection processes."
+  },
+  {
     date: "Jul 2025",
-    title: "CodeTag Studio",
+    company: "CodeTag Studio",
+    role: "Fullstack Developer",
     description:
       "Together with my teammate, I built CodeTag, a platform that helps people create websites for various purposes such as business needs, company profiles, and more."
   },
   {
     date: "Jul 2024",
-    title: "PT. Telkom Indonesia Tbk - Network Area & IS Operation",
+    company: "PT. Telkom Indonesia Tbk",
+    role: "Network Area & IS Operation",
     description:
       "Maintenance of Backbone devices (DWDM) IGG, ZTE, and Huawei\n- Supervision of Fiber Optic (FO) cables\n- Repair of cut FO cables\n- DWDM link testing for operational needs"
   },
   {
     date: "Aug 2023",
-    title: "Independent Study - Dicoding",
+    company: "Dicoding",
+    role: "Independent Study",
     description:
       "Studied and practiced Front-End and Back-End web development, focusing on building responsive interfaces and developing robust server-side applications. Gained experience with modern web technologies and frameworks while enhancing problem-solving and coding skills."
   },
-  {
-    date: "Jul 2023",
-    title: "Junior Web Developer - VSGA",
-    description:
-      "Vocational School Graduate Academy Digital Talent Scholarship Kominfo. During my training as a Junior Web Developer, I mastered the basic principles of web development, implemented creative ideas, and honed my skills using various web technologies."
-  }
 ];
 
-const ExperienceCard = ({ date, title, description }: { date: string; title: string; description: string; }) => (
+const ExperienceCard = ({ date, title, company, role, description }: {
+  date: string;
+  title?: string;
+  company?: string;
+  role?: string;
+  description: string;
+}) => (
   <motion.div
     variants={itemVariants}
     className="bg-[#1C1C1C] p-6 rounded-xl border border-gray-800/50 hover:border-purple-500/50 transition-colors duration-300"
   >
     <p className="text-gray-400 text-sm mb-3">{date}</p>
-    <h3 className="font-bold text-white text-lg mb-4">{title}</h3>
+    {company && role ? (
+      <div className="mb-4">
+        <h3 className="font-bold text-white text-lg">{company}</h3>
+        <p className="text-purple-400 text-base mt-1">{role}</p>
+      </div>
+    ) : (
+      <h3 className="font-bold text-white text-lg mb-4">{title}</h3>
+    )}
     <p className="text-gray-400 text-sm leading-relaxed whitespace-pre-line">{description}</p>
   </motion.div>
 );
@@ -116,8 +135,8 @@ const AboutSection = () => (
         About Me
       </motion.h1>
       <motion.p variants={itemVariants} className="text-gray-300 text-lg lg:text-xl leading-relaxed max-w-4xl">
-        I am a graduate of Telkom University Purwokerto with a degree in Informatics Engineering. 
-        I have experience and a strong interest in front-end and back-end web development, with skills in PHP, JavaScript, Laravel, and Next.js. 
+        I am a graduate of Telkom University Purwokerto with a degree in Informatics Engineering.
+        I have experience and a strong interest in front-end and back-end web development, with skills in PHP, JavaScript, Laravel, and Next.js.
         I am also proficient in managing data using SQL and have a deep interest in emerging technologies and solving complex problems. Currently,
         I am seeking an internship opportunity to further develop my skills and build a career in the technology field.
       </motion.p>
@@ -140,62 +159,28 @@ const AboutSection = () => (
 // PORTFOLIO SECTION
 // ============================================================================
 
-const portfolioItems = [
-  {
-    title: "Website: Grand Telar Residence",
-    imageUrl: "/grand1.png",
-    link: "https://grandtelarresidence.site/"
-  },
-  {
-    title: "Website: CodeTag Studio",
-    imageUrl: "/porto2.png",
-    link: "https://codetag-ten.vercel.app/"
-  },
-  {
-    title: "Website: Jokiin Rush",
-    imageUrl: "/porto3.png",
-    link: "https://jokirush-rsom.vercel.app/"
-  },
-  {
-    title: "Website: Pemerintah Desa Sebet",
-    imageUrl: "/porto4.png",
-    link: "https://pemdes-sebet.site/"
-  },
-  {
-    title: "Website : Cashvent",
-    imageUrl: "/porto51.png",
-    link: "https://cashvent.site/"
-  },
-  {
-    title: "Website : Telkommerce",
-    imageUrl: "/porto6.png",
-    link: "https://telkommerce-seven.vercel.app/"
-  }
-];
-
-const PortfolioCard = ({ title, imageUrl, link }: { title: string; imageUrl: string; link: string; }) => (
-  <motion.a 
-    href={link} 
-    variants={itemVariants} 
-    className="block group"
-    target="_blank"
-    rel="noopener noreferrer"
-  >
-    <div className="bg-[#1C1C1C] rounded-xl overflow-hidden border border-gray-800/50 group-hover:border-purple-500/50 transition-all duration-300">
-      <div className="overflow-hidden relative aspect-[4/3]">
-        <Image 
-          src={imageUrl} 
-          alt={title} 
-          fill
-          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-          className="object-cover group-hover:scale-105 transition-transform duration-300" 
-        />
+const PortfolioCard = ({ title, imageUrl, slug }: { title: string; imageUrl: string; slug: string; }) => (
+  <Link href={`/project/${slug}`}>
+    <motion.div
+      variants={itemVariants}
+      className="block group cursor-pointer"
+    >
+      <div className="bg-[#1C1C1C] rounded-xl overflow-hidden border border-gray-800/50 group-hover:border-purple-500/50 transition-all duration-300">
+        <div className="overflow-hidden relative aspect-[4/3]">
+          <Image
+            src={imageUrl}
+            alt={title}
+            fill
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+            className="object-cover group-hover:scale-105 transition-transform duration-300"
+          />
+        </div>
+        <div className="p-5">
+          <h3 className="font-bold text-white text-lg">{title}</h3>
+        </div>
       </div>
-      <div className="p-5">
-        <h3 className="font-bold text-white text-lg">{title}</h3>
-      </div>
-    </div>
-  </motion.a>
+    </motion.div>
+  </Link>
 );
 
 const PortfolioSection = () => (
@@ -210,11 +195,11 @@ const PortfolioSection = () => (
       My Portfolio
     </motion.h2>
     <motion.p variants={itemVariants} className="text-gray-300 text-lg lg:text-xl mt-4 max-w-3xl">
-      Feel free to check out my design portfolio to see my works. Some of them are live, showcasing my versatility in different design styles.
+      Feel free to check out my design portfolio to see my works. Click on any project to see detailed information about the tech stack, features, and my role.
     </motion.p>
     <div className="mt-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-      {portfolioItems.map((item, index) => (
-        <PortfolioCard key={index} {...item} />
+      {projectsData.map((item, index) => (
+        <PortfolioCard key={index} title={item.title} imageUrl={item.imageUrl} slug={item.slug} />
       ))}
     </div>
   </motion.div>
@@ -260,7 +245,7 @@ const ContactSection = () => (
               <div>
                 <p className="text-sm text-gray-400">Email</p>
                 <a href="mailto:rifannurfakhri17@gmail.com" className="hover:text-purple-400 transition-colors">
-                  rifannurfakhri17@gmail.com
+                  fakhririfan86@gmail.com
                 </a>
               </div>
             </div>
@@ -290,7 +275,7 @@ const ContactSection = () => (
 
           <div className="flex gap-4 pt-4">
             <motion.a
-              href="https://github.com/yourusername"
+              href="https://github.com/RifanFakhri"
               target="_blank"
               rel="noopener noreferrer"
               className="p-3 bg-[#1C1C1C] rounded-lg hover:bg-purple-600/20 transition-colors group"
@@ -300,7 +285,7 @@ const ContactSection = () => (
               <Github className="w-5 h-5 text-gray-400 group-hover:text-white" />
             </motion.a>
             <motion.a
-              href="https://linkedin.com/in/yourusername"
+              href="https://linkedin.com/in/rifanfakhri"
               target="_blank"
               rel="noopener noreferrer"
               className="p-3 bg-[#1C1C1C] rounded-lg hover:bg-purple-600/20 transition-colors group"
@@ -310,7 +295,7 @@ const ContactSection = () => (
               <Linkedin className="w-5 h-5 text-gray-400 group-hover:text-white" />
             </motion.a>
             <motion.a
-              href="https://instagram.com/yourusername"
+              href="https://instagram.com/fakhririfan"
               target="_blank"
               rel="noopener noreferrer"
               className="p-3 bg-[#1C1C1C] rounded-lg hover:bg-purple-600/20 transition-colors group"
@@ -398,9 +383,9 @@ const Footer = () => (
           </p>
           <div className="flex gap-4 mt-6">
             {[
-              { icon: Github, href: "https://github.com/yourusername", label: "GitHub" },
-              { icon: Linkedin, href: "https://linkedin.com/in/yourusername", label: "LinkedIn" },
-              { icon: Instagram, href: "https://instagram.com/yourusername", label: "Instagram" },
+              { icon: Github, href: "https://github.com/RifanFakhri", label: "GitHub" },
+              { icon: Linkedin, href: "https://linkedin.com/in/rifanfakhri", label: "LinkedIn" },
+              { icon: Instagram, href: "https://instagram.com/fakhririfan", label: "Instagram" },
             ].map((social, index) => (
               <motion.a
                 key={index}
@@ -569,12 +554,12 @@ export default function PortfolioPage() {
           <motion.div variants={imageVariants} whileHover="hover" className="flex-shrink-0">
             <div className="relative">
               <div className="absolute inset-0 bg-gradient-to-r from-purple-600 to-pink-600 rounded-full blur-md opacity-50 animate-pulse"></div>
-              <Image 
-                src={PROFILE_IMAGE_URL} 
-                alt="Rifan Nurfakhri" 
+              <Image
+                src={PROFILE_IMAGE_URL}
+                alt="Rifan Nurfakhri"
                 width={380}
                 height={380}
-                className="relative rounded-full object-cover border-4 border-gray-800 shadow-2xl w-[280px] h-[280px] md:w-[320px] md:h-[320px] lg:w-[380px] lg:h-[380px] z-10" 
+                className="relative rounded-full object-cover border-4 border-gray-800 shadow-2xl w-[280px] h-[280px] md:w-[320px] md:h-[320px] lg:w-[380px] lg:h-[380px] z-10"
               />
             </div>
           </motion.div>
